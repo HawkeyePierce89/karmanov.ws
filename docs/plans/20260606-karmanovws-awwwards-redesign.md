@@ -71,9 +71,9 @@ Rebuild karmanov.ws as a single-page, dark, Awwwards-style personal site. Résum
 
 **Files:** Create `src/components/AvailableBadge.astro`, `src/components/Nav.astro`
 
-- [ ] Write `AvailableBadge.astro` (green glass pill)
-- [ ] Write sticky `Nav.astro` (logo, About/Experience/Projects anchors, badge gated on `content.flags.available`)
-- [ ] Run `npm run build` — passes
+- [x] Write `AvailableBadge.astro` (green glass pill)
+- [x] Write sticky `Nav.astro` (logo, About/Experience/Projects anchors, badge gated on `content.flags.available`)
+- [x] Run `npm run build` — passes
 
 ### Task 7: 3D hero island (Blob + Canvas)
 
