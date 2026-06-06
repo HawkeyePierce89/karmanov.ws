@@ -82,5 +82,12 @@ const track = [...stack, ...stack];
       width: 100%;
       justify-content: center;
     }
+
+    /* The track is rendered twice for the seamless loop; with the animation
+       paused and the track wrapping, hide the duplicate copy so reduced-motion
+       users don't see every technology listed twice. */
+    .stack__item[aria-hidden="true"] {
+      display: none;
+    }
   }
 </style>
