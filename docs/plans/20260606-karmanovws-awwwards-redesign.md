@@ -116,9 +116,9 @@ Rebuild karmanov.ws as a single-page, dark, Awwwards-style personal site. Résum
 
 **Files:** Create `src/components/Projects.astro`
 
-- [ ] Render static cards (title, blurb, GitHub/href link, `data-repo`, empty `data-stars`/`data-lang`)
-- [ ] Add component `<script>` importing `fetchRepoMeta` to populate stars/language progressively
-- [ ] Run `npm run build`; `grep -c "its.events" dist/index.html` ≥ 1
+- [x] Render static cards (title, blurb, GitHub/href link, `data-repo`, empty `data-stars`/`data-lang`)
+- [x] Add component `<script>` importing `fetchRepoMeta` to populate stars/language progressively
+- [x] Run `npm run build`; `grep -c "its.events" dist/index.html` ≥ 1
 
 ### Task 13: Contact + Footer
 

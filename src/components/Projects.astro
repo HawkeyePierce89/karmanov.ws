@@ -1,0 +1,187 @@
+---
+/**
+ * Projects — curated cards that render as static HTML (for SEO) and are then
+ * progressively enhanced with live GitHub stars/language.
+ *
+ * Fully presentational and content-driven: every card comes from
+ * `content.projects` in `content.ts` (title / blurb / href / repo). Each card
+ * carries a `data-repo` hook plus empty `data-stars` / `data-lang` slots that
+ * the client script below fills in once `fetchRepoMeta` resolves. If GitHub is
+ * unreachable the cards simply render without live numbers.
+ */
+import { content } from "../content/content";
+
+const { projects, flags } = content;
+---
+
+<section class="projects" id="projects">
+  <div class="container">
+    <p class="label reveal">Projects</p>
+
+    <ul class="projects__grid" data-gh-user={flags.githubUser}>
+      {
+        projects.map((project) => (
+          <li class="projects__card reveal" data-repo={project.repo}>
+            <a class="projects__link" href={project.href} target="_blank" rel="noopener noreferrer">
+              <div class="projects__head">
+                <h3 class="projects__title">{project.title}</h3>
+                <span class="projects__arrow" aria-hidden="true">↗</span>
+              </div>
+              <p class="projects__blurb">{project.blurb}</p>
+              <div class="projects__meta">
+                <span class="projects__stars" data-stars hidden>
+                  <span class="projects__star" aria-hidden="true">★</span>
+                  <span class="projects__stars-value"></span>
+                </span>
+                <span class="projects__lang" data-lang hidden>
+                  <span class="projects__dot" aria-hidden="true"></span>
+                  <span class="projects__lang-value"></span>
+                </span>
+                <span class="projects__source">GitHub</span>
+              </div>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<script>
+  import { fetchRepoMeta } from "../lib/github";
+
+  const grid = document.querySelector<HTMLElement>(".projects__grid");
+  if (grid) {
+    const user = grid.dataset.ghUser;
+    const cards = Array.from(grid.querySelectorAll<HTMLElement>(".projects__card"));
+    const names = cards
+      .map((card) => card.dataset.repo)
+      .filter((name): name is string => Boolean(name));
+
+    fetchRepoMeta(names, user ? { user } : {})
+      .then((metas) => {
+        const byName = new Map(metas.map((meta) => [meta.name, meta]));
+        for (const card of cards) {
+          const meta = card.dataset.repo ? byName.get(card.dataset.repo) : undefined;
+          if (!meta) continue;
+
+          const starsEl = card.querySelector<HTMLElement>("[data-stars]");
+          const starsValue = card.querySelector<HTMLElement>(".projects__stars-value");
+          if (starsEl && starsValue && meta.stars > 0) {
+            starsValue.textContent = String(meta.stars);
+            starsEl.hidden = false;
+          }
+
+          const langEl = card.querySelector<HTMLElement>("[data-lang]");
+          const langValue = card.querySelector<HTMLElement>(".projects__lang-value");
+          if (langEl && langValue && meta.language) {
+            langValue.textContent = meta.language;
+            langEl.hidden = false;
+          }
+        }
+      })
+      .catch(() => {
+        /* Live enhancement is best-effort — static cards already shipped. */
+      });
+  }
+</script>
+
+<style>
+  .projects__grid {
+    margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+  }
+
+  .projects__card {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--bg-2);
+    transition:
+      border-color 0.4s var(--ease),
+      transform 0.4s var(--ease);
+  }
+
+  .projects__card:hover {
+    border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+    transform: translateY(-4px);
+  }
+
+  .projects__link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    height: 100%;
+    padding: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  .projects__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .projects__title {
+    font-size: clamp(1.3rem, 3vw, 1.7rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+
+  .projects__arrow {
+    font-size: 1.2rem;
+    color: var(--muted);
+    transition: color 0.4s var(--ease), transform 0.4s var(--ease);
+  }
+
+  .projects__card:hover .projects__arrow {
+    color: var(--accent-2);
+    transform: translate(2px, -2px);
+  }
+
+  .projects__blurb {
+    flex: 1;
+    font-size: 0.98rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .projects__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1.1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--muted);
+    padding-top: 0.4rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .projects__stars,
+  .projects__lang {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .projects__star {
+    color: var(--accent);
+  }
+
+  .projects__dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 999px;
+    background: linear-gradient(120deg, var(--accent), var(--accent-2));
+  }
+
+  .projects__source {
+    margin-left: auto;
+    letter-spacing: 0.04em;
+    color: var(--fg);
+  }
+</style>
