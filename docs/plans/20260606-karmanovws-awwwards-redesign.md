@@ -55,10 +55,10 @@ Rebuild karmanov.ws as a single-page, dark, Awwwards-style personal site. Résum
 
 **Files:** Create `src/lib/github.ts`, `src/lib/github.test.ts`
 
-- [ ] Write failing tests: field mapping + input-order preservation; localStorage cache reuse within TTL; refetch after TTL; omit on network failure with no cache; stale-on-error returns cached
-- [ ] Run tests — fail
-- [ ] Implement `RepoMeta`, `FetchOptions` (inject fetchImpl/now/ttlMs/storage/user), `fetchRepoMeta(names, options)` keyed `gh:<user>:<name>`, 24h TTL, stale-on-error
-- [ ] Run tests — pass (5 tests)
+- [x] Write failing tests: field mapping + input-order preservation; localStorage cache reuse within TTL; refetch after TTL; omit on network failure with no cache; stale-on-error returns cached
+- [x] Run tests — fail
+- [x] Implement `RepoMeta`, `FetchOptions` (inject fetchImpl/now/ttlMs/storage/user), `fetchRepoMeta(names, options)` keyed `gh:<user>:<name>`, 24h TTL, stale-on-error
+- [x] Run tests — pass (5 tests)
 
 ### Task 5: Base layout (SEO head, grain, global scripts)
 
