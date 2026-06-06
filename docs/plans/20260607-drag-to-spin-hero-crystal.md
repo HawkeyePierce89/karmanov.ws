@@ -78,8 +78,8 @@ Replace the crystal's current "constant slow spin + eased tilt-toward-pointer" b
 
 ### Task 5: Update documentation
 
-- [ ] Update `CLAUDE.md` "Non-obvious gotchas" / testing-scope notes: document the drag-to-spin interaction model, the new pure `lib/spin.ts` module (add to the unit-tested lib list alongside `github.ts`, `shapes.ts`), and that `Float rotationIntensity` is intentionally 0 to avoid conflicting with manual rotation.
-- [ ] Update `README.md` only if the hero interaction is described there.
+- [x] Update `CLAUDE.md` "Non-obvious gotchas" / testing-scope notes: document the drag-to-spin interaction model, the new pure `lib/spin.ts` module (add to the unit-tested lib list alongside `github.ts`, `shapes.ts`), and that `Float rotationIntensity` is intentionally 0 to avoid conflicting with manual rotation.
+- [x] Update `README.md` only if the hero interaction is described there.
 
 ## Post-Completion (manual / not agent-automatable)
 
