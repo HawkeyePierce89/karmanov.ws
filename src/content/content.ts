@@ -62,7 +62,7 @@ export interface Content {
   flags: {
     available: boolean;
     githubUser: string;
-    heroVariant: 'blob';
+    heroVariant: 'crystal';
   };
 }
 
@@ -187,7 +187,7 @@ export const content: Content = {
   flags: {
     available: true,
     githubUser: 'HawkeyePierce89',
-    heroVariant: 'blob',
+    heroVariant: 'crystal',
   },
 };
 

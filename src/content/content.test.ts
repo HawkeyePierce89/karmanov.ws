@@ -44,7 +44,7 @@ describe('content config', () => {
     expect(typeof content.flags.available).toBe('boolean');
     expect(content.flags.available).toBe(true);
     expect(content.flags.githubUser).toBe('HawkeyePierce89');
-    expect(content.flags.heroVariant).toBe('blob');
+    expect(content.flags.heroVariant).toBe('crystal');
   });
 
   it('links Telegram via the correct handle', () => {
