@@ -14,7 +14,7 @@ npm run dev        # local dev server with HMR
 npm run build      # static build to dist/
 npm run preview    # serve the production build locally
 npm run check      # astro check (type + template diagnostics)
-npm test           # run the vitest suite (content + github logic)
+npm test           # run the vitest suite (content + github + shapes logic)
 npm run check:seo  # assert key résumé strings are present in dist/index.html
 ```
 
@@ -34,9 +34,10 @@ reflects the change.
 src/
   content/content.ts   # single source of truth for all copy + flags
   lib/github.ts        # pure, tested GitHub fetch + cache + fallback layer
+  lib/shapes.ts        # pure, tested random hero-geometry picker
   layouts/Base.astro   # SEO head, grain, reduced-motion-aware global scripts
   components/           # presentational .astro sections
-  components/react/     # 3D hero island (Blob, HeroCanvas)
+  components/react/     # 3D hero island (Crystal, HeroCanvas)
   styles/global.css     # design tokens, base styles, fonts
 scripts/check-seo.mjs   # post-build SEO assertion
 ```
