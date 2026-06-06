@@ -1,0 +1,65 @@
+---
+/**
+ * Available-for-work badge — a green glass pill with a pulsing dot.
+ *
+ * Purely presentational; callers gate visibility on `content.flags.available`.
+ */
+export interface Props {
+  /** Override label text; defaults to availability copy. */
+  label?: string;
+}
+
+const { label = "Available for work" } = Astro.props;
+---
+
+<span class="badge">
+  <span class="badge__dot" aria-hidden="true"></span>
+  {label}
+</span>
+
+<style>
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55em;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    color: #6ee7b7;
+    background: color-mix(in srgb, #34d399 12%, transparent);
+    border: 1px solid color-mix(in srgb, #34d399 30%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    white-space: nowrap;
+  }
+
+  .badge__dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: #34d399;
+    box-shadow: 0 0 0 0 color-mix(in srgb, #34d399 70%, transparent);
+    animation: badge-pulse 2s var(--ease) infinite;
+  }
+
+  @keyframes badge-pulse {
+    0% {
+      box-shadow: 0 0 0 0 color-mix(in srgb, #34d399 70%, transparent);
+    }
+    70% {
+      box-shadow: 0 0 0 0.5rem transparent;
+    }
+    100% {
+      box-shadow: 0 0 0 0 transparent;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .badge__dot {
+      animation: none;
+    }
+  }
+</style>

@@ -1,0 +1,35 @@
+---
+/**
+ * Footer — closing strip with location and copyright.
+ *
+ * Presentational and content-driven: the location comes from `content.location`
+ * and the name from `content.name`. The year is rendered statically (2026).
+ */
+import { content } from "../content/content";
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <span class="footer__location">{content.location}</span>
+    <span class="footer__copy">© 2026 {content.name}</span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding-block: clamp(2.5rem, 5vw, 4rem);
+    border-top: 1px solid var(--line);
+  }
+
+  .footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+  }
+</style>

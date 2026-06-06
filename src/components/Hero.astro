@@ -1,0 +1,147 @@
+---
+/**
+ * Hero section — static, SEO-friendly overlay over an interactive 3D island.
+ *
+ * All copy is real static HTML driven by `content.ts` (positioning, name,
+ * subtitle, stack pills, availability badge). The 3D blob mounts as a React
+ * island via `<HeroCanvas>` gated on `client:media` so three.js is fetched
+ * only on pointer-fine viewports ≥ 768px. The CSS-gradient blob always renders
+ * underneath as the fallback — it is all that shows on phones, touch devices,
+ * and reduced-motion, where the island never loads.
+ */
+import { content } from "../content/content";
+import AvailableBadge from "./AvailableBadge.astro";
+import HeroCanvas from "./react/HeroCanvas";
+
+const heroStack = content.stack.slice(0, 6);
+---
+
+<section class="hero" id="top">
+  <div class="hero__canvas" aria-hidden="true">
+    <div class="hero__blob"></div>
+    <HeroCanvas
+      client:media="(min-width: 768px) and (pointer: fine) and (prefers-reduced-motion: no-preference)"
+    />
+  </div>
+
+  <div class="hero__inner container">
+    <p class="label reveal">{content.positioning.split(" ").slice(0, 3).join(" ")}</p>
+
+    <h1 class="hero__title reveal">{content.name}</h1>
+
+    <p class="hero__subtitle reveal">{content.subtitle}</p>
+
+    <ul class="hero__stack reveal" aria-label="Core stack">
+      {heroStack.map((tech) => <li class="hero__pill">{tech}</li>)}
+    </ul>
+
+    {
+      content.flags.available && (
+        <div class="hero__badge reveal">
+          <AvailableBadge />
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding-block: clamp(6rem, 16vh, 11rem) clamp(4rem, 10vh, 8rem);
+  }
+
+  /* --- 3D island / CSS fallback layer ------------------------------- */
+  .hero__canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .hero__canvas :global(canvas) {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .hero__blob {
+    position: absolute;
+    top: 50%;
+    left: 65%;
+    width: min(46vw, 34rem);
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 35% 30%, var(--accent-2), transparent 55%),
+      radial-gradient(circle at 70% 70%, var(--accent), transparent 60%);
+    filter: blur(38px);
+    opacity: 0.55;
+    animation: blob-spin 26s linear infinite;
+  }
+
+  /* --- Static overlay ----------------------------------------------- */
+  .hero__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: clamp(1.1rem, 2.5vw, 1.6rem);
+    max-width: 60rem;
+  }
+
+  .hero__title {
+    font-size: clamp(3.2rem, 13vw, 9.5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 0.92;
+    background: linear-gradient(120deg, var(--fg) 30%, var(--accent) 75%, var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .hero__subtitle {
+    max-width: 38ch;
+    font-size: clamp(1.05rem, 2.2vw, 1.5rem);
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .hero__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .hero__pill {
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--fg);
+    border: 1px solid var(--line);
+    background: color-mix(in srgb, var(--bg-2) 70%, transparent);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .hero__badge {
+    margin-top: 0.4rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__blob {
+      animation: none;
+    }
+  }
+</style>

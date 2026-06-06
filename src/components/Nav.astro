@@ -1,0 +1,104 @@
+---
+/**
+ * Sticky top navigation — logo, section anchors, and an availability badge.
+ *
+ * Anchors and the badge are driven by `content.ts`; the badge only renders
+ * when `content.flags.available` is true.
+ */
+import { content } from "../content/content";
+import AvailableBadge from "./AvailableBadge.astro";
+
+const links = [
+  { label: "About", href: "#about" },
+  { label: "Experience", href: "#experience" },
+  { label: "Projects", href: "#projects" },
+];
+---
+
+<header class="nav">
+  <div class="nav__inner container">
+    <a class="nav__logo" href="#top" aria-label={content.name}>
+      {content.name.split(" ")[0]}<span class="nav__dot">.</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      {
+        links.map((link) => (
+          <a class="nav__link" href={link.href}>
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    {content.flags.available && <AvailableBadge />}
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: color-mix(in srgb, var(--bg) 65%, transparent);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    min-height: 4.25rem;
+  }
+
+  .nav__logo {
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -0.03em;
+    margin-right: auto;
+  }
+
+  .nav__dot {
+    color: var(--accent);
+  }
+
+  .nav__links {
+    display: none;
+    gap: 1.75rem;
+  }
+
+  .nav__link {
+    position: relative;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--muted);
+    transition: color 0.25s var(--ease);
+  }
+
+  .nav__link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.35rem;
+    width: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    transition: width 0.3s var(--ease);
+  }
+
+  .nav__link:hover {
+    color: var(--fg);
+  }
+
+  .nav__link:hover::after {
+    width: 100%;
+  }
+
+  @media (min-width: 720px) {
+    .nav__links {
+      display: flex;
+    }
+  }
+</style>
