@@ -78,6 +78,67 @@ describe('fetchRepoMeta', () => {
     expect(fetchImpl).toHaveBeenCalledTimes(2);
   });
 
+  it('applies defaults for missing/null fields (e.g. language: null)', async () => {
+    const fetchImpl = okFetch((url) => {
+      const name = url.split('/').pop()!;
+      // GitHub legitimately returns language: null for repos with no detected
+      // language, and may omit fields entirely.
+      return { name, language: null };
+    });
+
+    const result = await fetchRepoMeta(['a'], baseOptions({ fetchImpl }));
+
+    expect(result[0]).toEqual({
+      name: 'a',
+      stars: 0,
+      language: null,
+      url: 'https://github.com/HawkeyePierce89/a',
+    });
+  });
+
+  it('omits a repo on a non-OK HTTP response (404 / rate-limit) with no cache', async () => {
+    const fetchImpl = vi.fn(async () => ({
+      ok: false,
+      status: 404,
+      json: async () => ({ message: 'Not Found' }),
+    })) as unknown as typeof fetch;
+
+    const result = await fetchRepoMeta(['a'], baseOptions({ fetchImpl }));
+    expect(result).toEqual([]);
+  });
+
+  it('omits only the failing repo and preserves order for the rest', async () => {
+    const fetchImpl = vi.fn(async (url: string) => {
+      if (url.endsWith('/b')) throw new Error('network down');
+      const name = url.split('/').pop()!;
+      return { ok: true, status: 200, json: async () => repoPayload(name) };
+    }) as unknown as typeof fetch;
+
+    const result = await fetchRepoMeta(['a', 'b', 'c'], baseOptions({ fetchImpl }));
+    expect(result.map((r) => r.name)).toEqual(['a', 'c']);
+  });
+
+  it('ignores a corrupt cache entry and refetches', async () => {
+    localStorage.setItem('gh:HawkeyePierce89:a', 'not-json{');
+    const fetchImpl = okFetch((url) => repoPayload(url.split('/').pop()!));
+
+    const result = await fetchRepoMeta(['a'], baseOptions({ fetchImpl }));
+    expect(fetchImpl).toHaveBeenCalledTimes(1);
+    expect(result[0].name).toBe('a');
+  });
+
+  it('ignores a structurally-invalid cache entry (no numeric fetchedAt)', async () => {
+    // A legacy/garbage entry must not leak an `undefined` meta when a refetch
+    // also fails — the repo should be cleanly omitted instead.
+    localStorage.setItem('gh:HawkeyePierce89:a', JSON.stringify({ meta: {} }));
+    const failImpl = vi.fn(async () => {
+      throw new Error('network down');
+    }) as unknown as typeof fetch;
+
+    const result = await fetchRepoMeta(['a'], baseOptions({ fetchImpl: failImpl }));
+    expect(result).toEqual([]);
+  });
+
   it('omits a repo on network failure when there is no cache', async () => {
     const fetchImpl = vi.fn(async () => {
       throw new Error('network down');

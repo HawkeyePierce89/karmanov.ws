@@ -45,12 +45,26 @@ function cacheKey(user: string, name: string): string {
   return `gh:${user}:${name}`;
 }
 
+function isValidEntry(value: unknown): value is CacheEntry {
+  if (typeof value !== 'object' || value === null) return false;
+  const entry = value as Record<string, unknown>;
+  return (
+    typeof entry.fetchedAt === 'number' &&
+    Number.isFinite(entry.fetchedAt) &&
+    typeof entry.meta === 'object' &&
+    entry.meta !== null
+  );
+}
+
 function readCache(storage: Storage | undefined, key: string): CacheEntry | null {
   if (!storage) return null;
   try {
     const raw = storage.getItem(key);
     if (!raw) return null;
-    return JSON.parse(raw) as CacheEntry;
+    const parsed: unknown = JSON.parse(raw);
+    // Guard against corrupt/legacy entries: an entry without a numeric
+    // `fetchedAt` would yield `NaN` comparisons and leak an `undefined` meta.
+    return isValidEntry(parsed) ? parsed : null;
   } catch {
     return null;
   }
@@ -119,7 +133,7 @@ export async function fetchRepoMeta(
   };
 
   const settled = await Promise.all(names.map((name) => resolveOne(name, opts)));
-  return settled.filter((meta): meta is RepoMeta => meta !== null);
+  return settled.filter((meta): meta is RepoMeta => meta != null);
 }
 
 export default fetchRepoMeta;
