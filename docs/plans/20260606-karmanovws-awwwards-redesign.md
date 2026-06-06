@@ -102,8 +102,8 @@ Rebuild karmanov.ws as a single-page, dark, Awwwards-style personal site. Résum
 
 **Files:** Create `src/components/Stack.astro`
 
-- [ ] Render duplicated stack list with marquee-slide animation, alternating color
-- [ ] Run `npm run build` — passes
+- [x] Render duplicated stack list with marquee-slide animation, alternating color
+- [x] Run `npm run build` — passes
 
 ### Task 11: Experience timeline
 

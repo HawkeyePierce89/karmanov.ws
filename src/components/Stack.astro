@@ -1,0 +1,82 @@
+---
+/**
+ * Stack marquee — an infinite horizontal scroll of the tech stack.
+ *
+ * Fully presentational and content-driven: the list of technologies comes
+ * from `content.stack` in `content.ts`. The track is rendered twice so the
+ * `marquee-slide` keyframe (translateX 0 → -50%) loops seamlessly. Items
+ * alternate accent colours for visual rhythm.
+ */
+import { content } from "../content/content";
+
+const { stack } = content;
+// Render the list twice for a seamless -50% loop.
+const track = [...stack, ...stack];
+---
+
+<section class="stack" aria-label="Tech stack">
+  <div class="stack__viewport">
+    <ul class="stack__track" aria-hidden="false">
+      {
+        track.map((tech, i) => (
+          <li class={`stack__item ${i % 2 === 0 ? "is-a" : "is-b"}`}>
+            {tech}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .stack {
+    padding: clamp(3rem, 9vw, 6rem) 0;
+    border-block: 1px solid var(--line);
+    overflow: hidden;
+  }
+
+  .stack__viewport {
+    overflow: hidden;
+  }
+
+  .stack__track {
+    display: flex;
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: max-content;
+    will-change: transform;
+    animation: marquee-slide 32s linear infinite;
+  }
+
+  .stack__item {
+    flex: 0 0 auto;
+    font-size: clamp(2rem, 6vw, 4.5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+
+  .stack__item.is-a {
+    color: var(--fg);
+  }
+
+  .stack__item.is-b {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--accent);
+  }
+
+  /* Pause the loop when the user prefers reduced motion. */
+  @media (prefers-reduced-motion: reduce) {
+    .stack__track {
+      animation: none;
+      flex-wrap: wrap;
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
