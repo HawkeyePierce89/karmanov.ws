@@ -41,6 +41,11 @@ describe('applyFriction', () => {
     expect(applyFriction({ x: 0, y: 0 }, 0.94, 1 / 60)).toEqual({ x: 0, y: 0 });
   });
 
+  it('leaves velocity unchanged when dt is 0 (paused/first frame)', () => {
+    // friction ** 0 === 1, so a zero-length frame must not decay the spin.
+    expect(applyFriction({ x: 1.5, y: -2.5 }, 0.94, 0)).toEqual({ x: 1.5, y: -2.5 });
+  });
+
   it('eventually decays a spin to a full stop', () => {
     let vel = { x: 5, y: -3 };
     for (let i = 0; i < 1000 && (vel.x !== 0 || vel.y !== 0); i++) {
@@ -59,5 +64,15 @@ describe('snapToZero', () => {
   it('leaves above-epsilon values untouched', () => {
     expect(snapToZero(0.5)).toBe(0.5);
     expect(snapToZero(-0.5)).toBe(-0.5);
+  });
+
+  it('does not snap a value exactly at epsilon (strict <)', () => {
+    expect(snapToZero(SPIN_EPSILON)).toBe(SPIN_EPSILON);
+    expect(snapToZero(-SPIN_EPSILON)).toBe(-SPIN_EPSILON);
+  });
+
+  it('respects a custom epsilon argument', () => {
+    expect(snapToZero(0.05, 0.1)).toBe(0);
+    expect(snapToZero(0.5, 0.1)).toBe(0.5);
   });
 });

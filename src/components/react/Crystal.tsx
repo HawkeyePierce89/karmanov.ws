@@ -1,4 +1,4 @@
-import { createElement, useMemo, useRef } from 'react';
+import { createElement, useEffect, useMemo, useRef } from 'react';
 import { useFrame, type ThreeEvent } from '@react-three/fiber';
 import { MeshTransmissionMaterial } from '@react-three/drei';
 import type { Mesh } from 'three';
@@ -31,14 +31,19 @@ export default function Crystal() {
   const dragging = useRef(false);
   const hasInteracted = useRef(false);
   const lastPointer = useRef({ x: 0, y: 0 });
-  // Last raw drag delta this move, reused as the "throw" velocity on release.
-  const lastDelta = useRef<Velocity>({ x: 0, y: 0 });
-  // Inertia velocity in rotation units/sec; decays via applyFriction.
+  // Inertia velocity in rotation units/sec; each drag move writes the latest
+  // "throw" value here and useFrame consumes/decays it once the drag ends.
   const velocity = useRef<Velocity>({ x: 0, y: 0 });
 
   const setCursor = (cursor: string) => {
     document.body.style.cursor = cursor;
   };
+
+  // If the island unmounts mid-drag (e.g. the client:media query stops
+  // matching on resize), don't leave the page stuck on a grab/grabbing cursor.
+  useEffect(() => () => {
+    document.body.style.cursor = '';
+  }, []);
 
   const onPointerDown = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
@@ -46,7 +51,6 @@ export default function Crystal() {
     dragging.current = true;
     hasInteracted.current = true;
     velocity.current = { x: 0, y: 0 };
-    lastDelta.current = { x: 0, y: 0 };
     lastPointer.current = { x: e.clientX, y: e.clientY };
     setCursor('grabbing');
   };
@@ -59,8 +63,8 @@ export default function Crystal() {
     const dy = e.clientY - lastPointer.current.y;
     m.rotation.y += dx * DRAG_K;
     m.rotation.x += dy * DRAG_K;
-    // Per-second velocity for the throw; applied frame-by-frame after release.
-    lastDelta.current = { x: dy * DRAG_K * 60, y: dx * DRAG_K * 60 };
+    // Per-second velocity for the throw; consumed/decayed by useFrame on release.
+    velocity.current = { x: dy * DRAG_K * 60, y: dx * DRAG_K * 60 };
     lastPointer.current = { x: e.clientX, y: e.clientY };
   };
 
@@ -72,7 +76,7 @@ export default function Crystal() {
       // capture may already be gone (e.g. pointerleave) — ignore.
     }
     dragging.current = false;
-    velocity.current = lastDelta.current;
+    // velocity already holds the latest move's throw value; useFrame takes over.
     setCursor('grab');
   };
 
