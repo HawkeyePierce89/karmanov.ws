@@ -64,8 +64,8 @@ Rebuild karmanov.ws as a single-page, dark, Awwwards-style personal site. Résum
 
 **Files:** Create `src/layouts/Base.astro`
 
-- [ ] Write head (charset, viewport, description, canonical, OG/Twitter meta, title from content), grain div, `<slot/>`, and three reduced-motion-aware client scripts: IntersectionObserver reveal, Lenis smooth scroll (dynamic import), custom cursor (skip on touch)
-- [ ] Run `npm run build` — passes (lenis dynamic import resolves)
+- [x] Write head (charset, viewport, description, canonical, OG/Twitter meta, title from content), grain div, `<slot/>`, and three reduced-motion-aware client scripts: IntersectionObserver reveal, Lenis smooth scroll (dynamic import), custom cursor (skip on touch)
+- [x] Run `npm run build` — passes (lenis dynamic import resolves)
 
 ### Task 6: Nav + Available badge
 
