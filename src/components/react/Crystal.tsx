@@ -1,7 +1,8 @@
-import { useRef } from 'react';
+import { createElement, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { MeshTransmissionMaterial } from '@react-three/drei';
 import type { Mesh } from 'three';
+import { pickShape } from '../../lib/shapes';
 
 /**
  * Faceted refractive crystal. The transmission material refracts whatever the
@@ -10,6 +11,8 @@ import type { Mesh } from 'three';
  */
 export default function Crystal() {
   const mesh = useRef<Mesh>(null);
+  // Picked once on mount, so each page load/refresh shows a new shape.
+  const shape = useMemo(() => pickShape(), []);
 
   useFrame((state, delta) => {
     const m = mesh.current;
@@ -22,8 +25,8 @@ export default function Crystal() {
 
   return (
     <mesh ref={mesh}>
-      {/* detail 0 = sharp gem facets */}
-      <icosahedronGeometry args={[1, 0]} />
+      {/* random faceted geometry; detail 0 = sharp gem facets */}
+      {createElement(shape.type, { args: shape.args })}
       <MeshTransmissionMaterial
         samples={6}
         resolution={256}
