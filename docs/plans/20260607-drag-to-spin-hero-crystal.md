@@ -39,11 +39,11 @@ Replace the crystal's current "constant slow spin + eased tilt-toward-pointer" b
 - Create: `src/lib/spin.ts`
 - Create: `src/lib/spin.test.ts`
 
-- [ ] Define `Velocity = { x: number; y: number }`.
-- [ ] Implement `applyFriction(vel, friction, dt)`: takes an angular velocity `{ x, y }`, a per-frame friction/decay factor (≈0.94, the feel at 60fps), and frame delta `dt`; returns the decayed velocity using a frame-rate-independent formula (`factor = friction ** (dt * 60)`) so the ~0.94/frame feel holds across refresh rates.
-- [ ] Add a snap-to-zero: if the resulting magnitude on an axis is below a small epsilon, clamp it to 0 so residual velocity stops cleanly. Export the epsilon or a helper if it keeps the code clean.
-- [ ] Write tests: decay reduces magnitude; a larger `dt` decays more than a smaller `dt`; `dt = 1/60` reproduces approximately the per-frame `friction` factor; velocity below epsilon snaps to exactly 0; zero velocity stays zero.
-- [ ] Run `npm test` — must pass before Task 2.
+- [x] Define `Velocity = { x: number; y: number }`.
+- [x] Implement `applyFriction(vel, friction, dt)`: takes an angular velocity `{ x, y }`, a per-frame friction/decay factor (≈0.94, the feel at 60fps), and frame delta `dt`; returns the decayed velocity using a frame-rate-independent formula (`factor = friction ** (dt * 60)`) so the ~0.94/frame feel holds across refresh rates.
+- [x] Add a snap-to-zero: if the resulting magnitude on an axis is below a small epsilon, clamp it to 0 so residual velocity stops cleanly. Export the epsilon or a helper if it keeps the code clean.
+- [x] Write tests: decay reduces magnitude; a larger `dt` decays more than a smaller `dt`; `dt = 1/60` reproduces approximately the per-frame `friction` factor; velocity below epsilon snaps to exactly 0; zero velocity stays zero.
+- [x] Run `npm test` — must pass before Task 2.
 
 ### Task 2: Drag-to-spin + inertia in Crystal.tsx
 
