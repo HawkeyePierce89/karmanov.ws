@@ -50,14 +50,14 @@ Replace the crystal's current "constant slow spin + eased tilt-toward-pointer" b
 **Files:**
 - Modify: `src/components/react/Crystal.tsx`
 
-- [ ] Add refs: `dragging` (boolean), `hasInteracted` (boolean), `lastPointer` (`{x,y}`), `velocity` (`{x,y}`).
-- [ ] `onPointerDown`: `e.stopPropagation()`, `e.target.setPointerCapture(e.pointerId)`, `dragging=true`, `hasInteracted=true`, zero out inertia velocity, store pointer position, set cursor `grabbing`.
-- [ ] `onPointerMove` (only while dragging): compute pointer delta from `lastPointer`, apply `rotation.y += dx*k`, `rotation.x += dy*k` (small sensitivity `k`); store the latest delta as the throw velocity; update `lastPointer`.
-- [ ] `onPointerUp` / `onPointerLeave`: `releasePointerCapture`, `dragging=false`, set inertia velocity from last delta, cursor `grab`.
-- [ ] `useFrame`: while dragging, skip inertia; while not dragging, apply `velocity` to rotation then decay it via `applyFriction(velocity, 0.94, delta)`. Keep a light idle `rotation.y` increment only while `!hasInteracted`.
-- [ ] Set cursor to `grab` on hover via `onPointerOver`/`onPointerOut` (reset to default when not dragging).
-- [ ] Update the file's top doc comment to describe the new drag-to-spin + inertia model (replace the "cheap slow spin plus eased tilt" description).
-- [ ] Build verification: `npm run build` (no Vitest for components per repo convention) — must pass before Task 3.
+- [x] Add refs: `dragging` (boolean), `hasInteracted` (boolean), `lastPointer` (`{x,y}`), `velocity` (`{x,y}`).
+- [x] `onPointerDown`: `e.stopPropagation()`, `e.target.setPointerCapture(e.pointerId)`, `dragging=true`, `hasInteracted=true`, zero out inertia velocity, store pointer position, set cursor `grabbing`.
+- [x] `onPointerMove` (only while dragging): compute pointer delta from `lastPointer`, apply `rotation.y += dx*k`, `rotation.x += dy*k` (small sensitivity `k`); store the latest delta as the throw velocity; update `lastPointer`.
+- [x] `onPointerUp` / `onPointerLeave`: `releasePointerCapture`, `dragging=false`, set inertia velocity from last delta, cursor `grab`.
+- [x] `useFrame`: while dragging, skip inertia; while not dragging, apply `velocity` to rotation then decay it via `applyFriction(velocity, 0.94, delta)`. Keep a light idle `rotation.y` increment only while `!hasInteracted`.
+- [x] Set cursor to `grab` on hover via `onPointerOver`/`onPointerOut` (reset to default when not dragging).
+- [x] Update the file's top doc comment to describe the new drag-to-spin + inertia model (replace the "cheap slow spin plus eased tilt" description).
+- [x] Build verification: `npm run build` (no Vitest for components per repo convention) — must pass before Task 3.
 
 ### Task 3: Stop Float from fighting manual rotation
 
