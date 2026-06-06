@@ -132,10 +132,10 @@ Rebuild karmanov.ws as a single-page, dark, Awwwards-style personal site. Résum
 
 **Files:** Modify `src/pages/index.astro`
 
-- [ ] Import and order all sections: Nav → Hero → About → Stack → Experience → Projects → Contact → Footer
-- [ ] Run `npx vitest run` — all green
-- [ ] Run `npm run check` — 0 errors
-- [ ] Run `npm run build` — passes
+- [x] Import and order all sections: Nav → Hero → About → Stack → Experience → Projects → Contact → Footer
+- [x] Run `npx vitest run` — all green
+- [x] Run `npm run check` — 0 errors
+- [x] Run `npm run build` — passes
 
 ### Task 15: Mobile 3D gating + SEO check script
 
