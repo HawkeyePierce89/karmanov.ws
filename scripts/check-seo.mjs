@@ -15,7 +15,8 @@ const REQUIRED = [
   "Anton Karmanov",
   "EXANTE",
   "Admitad",
-  "its.events",
+  "Loymax",
+  "NestJS",
   "Senior Full-Stack",
 ];
 

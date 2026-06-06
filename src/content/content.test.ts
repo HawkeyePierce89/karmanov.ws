@@ -34,9 +34,10 @@ describe('content config', () => {
     }
   });
 
-  it('includes the its.events project', () => {
-    const titles = content.projects.map((p) => p.title);
-    expect(titles.some((t) => /its\.events/i.test(t))).toBe(true);
+  it('features the starred repos (gpotter-gradient and Moon-Sugar)', () => {
+    const repos = content.projects.map((p) => p.repo);
+    expect(repos).toContain('gpotter-gradient');
+    expect(repos).toContain('Moon-Sugar');
   });
 
   it('sets the availability and GitHub flags', () => {
