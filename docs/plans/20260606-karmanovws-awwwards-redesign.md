@@ -46,10 +46,10 @@ Rebuild karmanov.ws as a single-page, dark, Awwwards-style personal site. Résum
 
 **Files:** Create `src/content/content.ts`, `src/content/content.test.ts`
 
-- [ ] Write failing test asserting: name, positioning, 4 experience entries newest-first (EXANTE first, Wow last), non-empty projects with repo/title, flags (available boolean, githubUser `HawkeyePierce89`)
-- [ ] Run test — fails (cannot resolve `./content`)
-- [ ] Write `content.ts` with `Content`/`ExperienceEntry`/`Project`/`SocialLink` types and the verbatim source-of-truth data; set Telegram social to `https://t.me/HawkeyePierce89`; flags `{ available:true, githubUser:'HawkeyePierce89', heroVariant:'blob' }`
-- [ ] Run test — passes
+- [x] Write failing test asserting: name, positioning, 4 experience entries newest-first (EXANTE first, Wow last), non-empty projects with repo/title, flags (available boolean, githubUser `HawkeyePierce89`)
+- [x] Run test — fails (cannot resolve `./content`)
+- [x] Write `content.ts` with `Content`/`ExperienceEntry`/`Project`/`SocialLink` types and the verbatim source-of-truth data; set Telegram social to `https://t.me/HawkeyePierce89`; flags `{ available:true, githubUser:'HawkeyePierce89', heroVariant:'blob' }`
+- [x] Run test — passes
 
 ### Task 4: GitHub data layer with cache + fallback (TDD)
 
