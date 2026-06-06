@@ -1,0 +1,10 @@
+/* Placeholder global styles — full design tokens land in Task 2. */
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}

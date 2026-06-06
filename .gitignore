@@ -142,3 +142,7 @@ vite.config.ts.timestamp-*
 
 # Brainstorming visual companion
 .superpowers/
+
+# Astro
+dist/
+.astro/

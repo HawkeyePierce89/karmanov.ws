@@ -24,16 +24,16 @@ Rebuild karmanov.ws as a single-page, dark, Awwwards-style personal site. Résum
 
 **Files:** Delete `index.html`, `styles.css` (root); Create `package.json`, `astro.config.mjs`, `tsconfig.json`, `public/CNAME`, `public/.nojekyll`, `src/pages/index.astro` (placeholder), `src/styles/global.css` (placeholder), `src/test/setup.ts`, `vitest.config.ts`; update `.gitignore`
 
-- [ ] Remove legacy `index.html`, `styles.css`, and root `CNAME` (replaced by `public/CNAME`)
-- [ ] Init `package.json` (type=module, scripts: dev/build/preview/check/test/test:watch); install runtime + dev deps per spec
-- [ ] Write `tsconfig.json` (extends astro/tsconfigs/strict, react-jsx, vitest globals)
-- [ ] Write `astro.config.mjs` (site `https://karmanov.ws`, output static, react integration)
-- [ ] Write `public/CNAME` (`karmanov.ws`), `public/.nojekyll` (empty)
-- [ ] Write placeholder `src/styles/global.css`, `src/pages/index.astro`
-- [ ] Write `src/test/setup.ts` (localStorage.clear in beforeEach), `vitest.config.ts` (getViteConfig, jsdom, globals)
-- [ ] Append `node_modules/`, `dist/`, `.astro/` to `.gitignore` if absent
-- [ ] Run `npm run build` — `dist/index.html` and `dist/CNAME` exist
-- [ ] Run `npx vitest run` — exits 0 (no test files yet acceptable)
+- [x] Remove legacy `index.html`, `styles.css`, and root `CNAME` (replaced by `public/CNAME`)
+- [x] Init `package.json` (type=module, scripts: dev/build/preview/check/test/test:watch); install runtime + dev deps per spec
+- [x] Write `tsconfig.json` (extends astro/tsconfigs/strict, react-jsx, vitest globals)
+- [x] Write `astro.config.mjs` (site `https://karmanov.ws`, output static, react integration)
+- [x] Write `public/CNAME` (`karmanov.ws`), `public/.nojekyll` (empty)
+- [x] Write placeholder `src/styles/global.css`, `src/pages/index.astro`
+- [x] Write `src/test/setup.ts` (localStorage.clear in beforeEach), `vitest.config.ts` (getViteConfig, jsdom, globals)
+- [x] Append `node_modules/`, `dist/`, `.astro/` to `.gitignore` if absent
+- [x] Run `npm run build` — `dist/index.html` and `dist/CNAME` exist
+- [x] Run `npx vitest run` — exits 0 (no test files yet acceptable; `test` script uses `--passWithNoTests`)
 
 ### Task 2: Design tokens, base styles, fonts
 
