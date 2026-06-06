@@ -70,11 +70,11 @@ Replace the crystal's current "constant slow spin + eased tilt-toward-pointer" b
 
 ### Task 4: Verify acceptance criteria
 
-- [ ] `npm test` — full Vitest suite passes (includes new `spin.test.ts`).
-- [ ] `npm run check` — astro type/template diagnostics pass.
-- [ ] `npm run build` — static build succeeds.
-- [ ] `npm run check:seo` — SEO guard passes (run after build).
-- [ ] New `spin.ts` logic has 80%+ coverage via its test.
+- [x] `npm test` — full Vitest suite passes (includes new `spin.test.ts`).
+- [x] `npm run check` — astro type/template diagnostics pass.
+- [x] `npm run build` — static build succeeds.
+- [x] `npm run check:seo` — SEO guard passes (run after build).
+- [x] New `spin.ts` logic has 80%+ coverage via its test (every function/branch exercised; coverage tool not installed per no-new-deps convention, verified by inspection).
 
 ### Task 5: Update documentation
 
