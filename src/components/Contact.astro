@@ -1,0 +1,114 @@
+---
+/**
+ * Contact section — a gradient-clipped CTA that links to email, with the
+ * social links rendered as a row beneath it.
+ *
+ * Fully presentational and content-driven: label, CTA copy, email and the
+ * social list all come from `content.contact` in `content.ts`. Editing copy
+ * or links never touches this markup.
+ */
+import { content } from "../content/content";
+
+const { label, cta, email, socials } = content.contact;
+---
+
+<section class="contact" id="contact">
+  <div class="container">
+    <p class="label reveal">{label}</p>
+
+    <a class="contact__cta reveal" href={`mailto:${email}`}>{cta}</a>
+
+    <p class="contact__email reveal">
+      <a href={`mailto:${email}`}>{email}</a>
+    </p>
+
+    <ul class="contact__socials reveal" aria-label="Elsewhere">
+      {
+        socials.map((social) => (
+          <li>
+            <a
+              class="contact__social"
+              href={social.href}
+              target={social.href.startsWith("mailto:") ? undefined : "_blank"}
+              rel={social.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+            >
+              {social.label}
+              <span class="contact__social-arrow" aria-hidden="true">↗</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .contact__cta {
+    display: block;
+    margin-top: clamp(1.5rem, 4vw, 2.5rem);
+    max-width: 14ch;
+    font-size: clamp(2.6rem, 11vw, 7.5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    background: linear-gradient(120deg, var(--fg) 25%, var(--accent) 70%, var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    transition: opacity 0.4s var(--ease);
+  }
+
+  .contact__cta:hover {
+    opacity: 0.85;
+  }
+
+  .contact__email {
+    margin-top: clamp(1.5rem, 4vw, 2.5rem);
+    font-size: clamp(1.1rem, 2.4vw, 1.6rem);
+    font-weight: 600;
+    color: var(--fg);
+  }
+
+  .contact__email a {
+    border-bottom: 1px solid var(--line);
+    transition: border-color 0.4s var(--ease);
+  }
+
+  .contact__email a:hover {
+    border-color: var(--accent-2);
+  }
+
+  .contact__socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.5rem;
+    margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+    padding: clamp(2rem, 5vw, 3rem) 0 0;
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+
+  .contact__social {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--muted);
+    transition: color 0.4s var(--ease);
+  }
+
+  .contact__social:hover {
+    color: var(--fg);
+  }
+
+  .contact__social-arrow {
+    font-size: 0.8em;
+    color: var(--accent-2);
+    transition: transform 0.4s var(--ease);
+  }
+
+  .contact__social:hover .contact__social-arrow {
+    transform: translate(2px, -2px);
+  }
+</style>

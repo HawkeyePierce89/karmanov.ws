@@ -124,9 +124,9 @@ Rebuild karmanov.ws as a single-page, dark, Awwwards-style personal site. Résum
 
 **Files:** Create `src/components/Contact.astro`, `src/components/Footer.astro`
 
-- [ ] Write Contact (gradient-clipped CTA, mailto, social links from content)
-- [ ] Write Footer ("Europe · Remote", © 2026 Anton Karmanov)
-- [ ] Run `npm run build` — passes
+- [x] Write Contact (gradient-clipped CTA, mailto, social links from content)
+- [x] Write Footer ("Europe · Remote", © 2026 Anton Karmanov)
+- [x] Run `npm run build` — passes
 
 ### Task 14: Assemble full page
 
