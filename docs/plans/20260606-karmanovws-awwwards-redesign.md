@@ -95,8 +95,8 @@ Rebuild karmanov.ws as a single-page, dark, Awwwards-style personal site. Résum
 
 **Files:** Create `src/components/About.astro`
 
-- [ ] Render label, lead statement, 14/7/4 stats, principle pills from content
-- [ ] Run `npm run build` — passes
+- [x] Render label, lead statement, 14/7/4 stats, principle pills from content
+- [x] Run `npm run build` — passes
 
 ### Task 10: Stack marquee
 
