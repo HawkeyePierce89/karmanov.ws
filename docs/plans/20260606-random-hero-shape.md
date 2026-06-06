@@ -29,16 +29,16 @@ Replace the fixed `icosahedronGeometry` in the hero's 3D crystal with a random p
 - Create: `src/lib/shapes.ts`
 - Create: `src/lib/shapes.test.ts`
 
-- [ ] Declare type `Shape = { type: string; args: number[] }` and export a `SHAPES` array of 5 entries with args tuned to a common scale (≈ radius 1):
+- [x] Declare type `Shape = { type: string; args: number[] }` and export a `SHAPES` array of 5 entries with args tuned to a common scale (≈ radius 1):
   - `icosahedronGeometry` args `[1, 0]`
   - `dodecahedronGeometry` args `[1, 0]`
   - `octahedronGeometry` args `[1.15, 0]`
   - `tetrahedronGeometry` args `[1.3, 0]`
   - `torusKnotGeometry` args `[0.6, 0.25, 128, 16]`
   (numbers are starting values; fine-tune visually during the build step)
-- [ ] Export a pure function `pickShape(rng: () => number = Math.random): Shape` returning `SHAPES[Math.floor(rng() * SHAPES.length)]`.
-- [ ] Write tests in `src/lib/shapes.test.ts`: `SHAPES` contains the 5 expected `type` values; all `args` are non-empty; `pickShape` with a stub rng returns a deterministic shape (values 0 and ~0.99 → boundary indices); the index never goes out of array bounds.
-- [ ] Run `npm test` — must pass before Task 2.
+- [x] Export a pure function `pickShape(rng: () => number = Math.random): Shape` returning `SHAPES[Math.floor(rng() * SHAPES.length)]`.
+- [x] Write tests in `src/lib/shapes.test.ts`: `SHAPES` contains the 5 expected `type` values; all `args` are non-empty; `pickShape` with a stub rng returns a deterministic shape (values 0 and ~0.99 → boundary indices); the index never goes out of array bounds.
+- [x] Run `npm test` — must pass before Task 2.
 
 ### Task 2: Integrate the random shape into Crystal
 
