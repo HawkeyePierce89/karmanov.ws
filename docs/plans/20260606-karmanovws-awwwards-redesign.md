@@ -39,8 +39,8 @@ Rebuild karmanov.ws as a single-page, dark, Awwwards-style personal site. Résum
 
 **Files:** Modify `src/styles/global.css`
 
-- [ ] Replace with full token set: colors (`--bg #070709`, `--fg`, `--muted`, `--accent #a855f7`, `--accent-2 #22d3ee`), layout vars, grain, `.label`, `section`, `.reveal`, keyframes (blob-spin, marquee-slide), `prefers-reduced-motion` block; import Inter weights 400–900
-- [ ] Run `npm run build` — passes (confirms @fontsource/inter imports resolve)
+- [x] Replace with full token set: colors (`--bg #070709`, `--fg`, `--muted`, `--accent #a855f7`, `--accent-2 #22d3ee`), layout vars, grain, `.label`, `section`, `.reveal`, keyframes (blob-spin, marquee-slide), `prefers-reduced-motion` block; import Inter weights 400–900
+- [x] Run `npm run build` — passes (confirms @fontsource/inter imports resolve)
 
 ### Task 3: Content config with types + test (TDD)
 
