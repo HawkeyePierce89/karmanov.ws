@@ -163,8 +163,8 @@ Rebuild karmanov.ws as a single-page, dark, Awwwards-style personal site. Résum
 
 ### Task 18: Update documentation
 
-- [ ] Add a brief README.md (dev/build/test commands, content.ts as edit point, deploy notes)
-- [ ] Note the one-time GitHub Pages Source → "GitHub Actions" switch for the handoff
+- [x] Add a brief README.md (dev/build/test commands, content.ts as edit point, deploy notes)
+- [x] Note the one-time GitHub Pages Source → "GitHub Actions" switch for the handoff
 
 ## Post-Completion (manual — not agent-automatable)
 - Browser smoke test (`npm run dev`): hero CSS blob → 3D mount on desktop; smooth scroll; reveals; custom cursor; no console errors
