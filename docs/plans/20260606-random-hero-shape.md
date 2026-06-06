@@ -53,10 +53,10 @@ Replace the fixed `icosahedronGeometry` in the hero's 3D crystal with a random p
 
 ### Task 3: Verify acceptance criteria
 
-- [ ] `npm test` — full suite green.
-- [ ] `npm run check` — astro check with no type/template errors.
-- [ ] `npm run build` — static build succeeds.
-- [ ] `npm run check:seo` — SEO check passes (résumé stays in the server-rendered HTML).
+- [x] `npm test` — full suite green.
+- [x] `npm run check` — astro check with no type/template errors.
+- [x] `npm run build` — static build succeeds.
+- [x] `npm run check:seo` — SEO check passes (résumé stays in the server-rendered HTML).
 
 ### Task 4: Update documentation
 
