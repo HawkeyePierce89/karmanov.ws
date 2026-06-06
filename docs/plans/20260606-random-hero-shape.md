@@ -45,11 +45,11 @@ Replace the fixed `icosahedronGeometry` in the hero's 3D crystal with a random p
 **Files:**
 - Modify: `src/components/react/Crystal.tsx`
 
-- [ ] Import `pickShape` from `../../lib/shapes` and `useMemo` / `createElement` from `react`.
-- [ ] Add `const shape = useMemo(() => pickShape(), [])` — picked once on mount (new shape on each refresh).
-- [ ] Replace the static `<icosahedronGeometry args={[1, 0]} />` with `createElement(shape.type, { args: shape.args })` inside `<mesh>`.
-- [ ] Leave `MeshTransmissionMaterial` and the `useFrame` rotation logic unchanged.
-- [ ] Run `npm test` — must pass before Task 3.
+- [x] Import `pickShape` from `../../lib/shapes` and `useMemo` / `createElement` from `react`.
+- [x] Add `const shape = useMemo(() => pickShape(), [])` — picked once on mount (new shape on each refresh).
+- [x] Replace the static `<icosahedronGeometry args={[1, 0]} />` with `createElement(shape.type, { args: shape.args })` inside `<mesh>`.
+- [x] Leave `MeshTransmissionMaterial` and the `useFrame` rotation logic unchanged.
+- [x] Run `npm test` — must pass before Task 3.
 
 ### Task 3: Verify acceptance criteria
 
