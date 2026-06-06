@@ -30,18 +30,14 @@ export default function Crystal() {
       <MeshTransmissionMaterial
         samples={6}
         resolution={256}
-        thickness={1.4}
-        roughness={0.05}
-        transmission={1}
-        ior={1.45}
-        chromaticAberration={0.4}
-        anisotropy={0.3}
-        distortion={0.3}
-        distortionScale={0.4}
-        temporalDistortion={0.1}
-        color="#ffffff"
+        thickness={1.5}
+        roughness={0.12}
+        transmission={0.55}
+        ior={1.5}
+        chromaticAberration={0.08}
+        color="#7c3aed"
         attenuationColor="#a855f7"
-        attenuationDistance={1.4}
+        attenuationDistance={1.2}
       />
     </mesh>
   );
