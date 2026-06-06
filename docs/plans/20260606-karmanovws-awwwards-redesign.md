@@ -79,9 +79,9 @@ Rebuild karmanov.ws as a single-page, dark, Awwwards-style personal site. Résum
 
 **Files:** Create `src/components/react/Blob.tsx`, `src/components/react/HeroCanvas.tsx`
 
-- [ ] Write `Blob.tsx` (distorted sphere via MeshDistortMaterial, pointer-reactive rotation in useFrame)
-- [ ] Write `HeroCanvas.tsx` (default export; R3F Canvas, lights, Float-wrapped Blob)
-- [ ] Run `npm run build` — passes
+- [x] Write `Blob.tsx` (distorted sphere via MeshDistortMaterial, pointer-reactive rotation in useFrame)
+- [x] Write `HeroCanvas.tsx` (default export; R3F Canvas, lights, Float-wrapped Blob)
+- [x] Run `npm run build` — passes
 
 ### Task 8: Hero section (static overlay + island mount)
 
