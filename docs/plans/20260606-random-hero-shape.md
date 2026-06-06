@@ -61,4 +61,4 @@ Replace the fixed `icosahedronGeometry` in the hero's 3D crystal with a random p
 ### Task 4: Update documentation
 
 - [x] Update `CLAUDE.md` if the internal convention changed (note the new pure module `src/lib/shapes.ts` and that the hero geometry is now random).
-- [x] README.md needs no changes (no user-facing control/content changes).
+- [x] Update `README.md` to reflect the new test scope (`content + github + shapes logic`) and project layout (`lib/shapes.ts`, `Crystal` island). No user-facing control/content changes.
