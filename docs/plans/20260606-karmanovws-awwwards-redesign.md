@@ -150,8 +150,8 @@ Rebuild karmanov.ws as a single-page, dark, Awwwards-style personal site. Résum
 
 **Files:** Create `.github/workflows/deploy.yml`
 
-- [ ] Write workflow (push to master + workflow_dispatch; pages permissions; build job runs test/build/check:seo then upload-pages-artifact; deploy job)
-- [ ] Run `npm run build` then verify `dist/CNAME` contains `karmanov.ws`
+- [x] Write workflow (push to master + workflow_dispatch; pages permissions; build job runs test/build/check:seo then upload-pages-artifact; deploy job)
+- [x] Run `npm run build` then verify `dist/CNAME` contains `karmanov.ws`
 
 ### Task 17: Verify acceptance criteria
 
