@@ -157,9 +157,9 @@ Rebuild karmanov.ws as a single-page, dark, Awwwards-style personal site. Résum
 
 **Files:** as needed across `src/`
 
-- [ ] Run full suite: `npx vitest run && npm run check && npm run build && npm run check:seo` — all pass
-- [ ] Confirm reduced-motion CSS block and `client:media` gating are present (static review)
-- [ ] Commit any polish changes
+- [x] Run full suite: `npx vitest run && npm run check && npm run build && npm run check:seo` — all pass
+- [x] Confirm reduced-motion CSS block and `client:media` gating are present (static review)
+- [x] Commit any polish changes (none needed — suite fully green)
 
 ### Task 18: Update documentation
 
