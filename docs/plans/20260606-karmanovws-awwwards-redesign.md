@@ -87,9 +87,9 @@ Rebuild karmanov.ws as a single-page, dark, Awwwards-style personal site. Résum
 
 **Files:** Create `src/components/Hero.astro`; Modify `src/pages/index.astro` (temporary mount)
 
-- [ ] Write `Hero.astro`: static overlay (positioning, name h1, subtitle, stack pills, badge) + CSS-gradient blob as `slot="fallback"` inside `<HeroCanvas client:only="react">`
-- [ ] Mount Base+Nav+Hero in `index.astro` for smoke build
-- [ ] Run `npm run build`; `grep -c "Karmanov" dist/index.html` ≥ 1 (proves hero text is static HTML)
+- [x] Write `Hero.astro`: static overlay (positioning, name h1, subtitle, stack pills, badge) + CSS-gradient blob as `slot="fallback"` inside `<HeroCanvas client:only="react">`
+- [x] Mount Base+Nav+Hero in `index.astro` for smoke build
+- [x] Run `npm run build`; `grep -c "Karmanov" dist/index.html` ≥ 1 (proves hero text is static HTML)
 
 ### Task 9: About section
 

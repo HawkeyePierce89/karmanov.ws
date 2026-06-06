@@ -1,18 +1,13 @@
 ---
-// Placeholder page — full layout assembled in later tasks.
-import "../styles/global.css";
+// Smoke assembly — full section order is finalised in Task 14.
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Hero from "../components/Hero.astro";
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Anton Karmanov</title>
-  </head>
-  <body>
-    <main>
-      <h1>Anton Karmanov</h1>
-    </main>
-  </body>
-</html>
+<Base>
+  <Nav />
+  <main>
+    <Hero />
+  </main>
+</Base>
