@@ -128,7 +128,10 @@ section {
 }
 
 /* ---- Scroll reveal -------------------------------------------------- */
-.reveal {
+/* Hidden-then-revealed ONLY when JS is active (`.js` set on <html> in head).
+   Without JS the content stays fully visible — static résumé HTML must never
+   depend on JS to be seen. */
+.js .reveal {
   opacity: 0;
   transform: translateY(28px);
   transition:
@@ -137,15 +140,18 @@ section {
   will-change: opacity, transform;
 }
 
-.reveal.is-visible {
+.js .reveal.is-visible {
   opacity: 1;
   transform: none;
 }
 
 /* ---- Keyframes ------------------------------------------------------ */
 @keyframes blob-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
   to {
-    transform: rotate(360deg);
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 

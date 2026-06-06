@@ -4,7 +4,8 @@
  *
  * Fully presentational and content-driven: the list of technologies comes
  * from `content.stack` in `content.ts`. The track is rendered twice so the
- * `marquee-slide` keyframe (translateX 0 → -50%) loops seamlessly. Items
+ * `marquee-slide` keyframe (translateX 0 → -50%) loops seamlessly; the second
+ * copy is `aria-hidden` so screen readers announce each item only once. Items
  * alternate accent colours for visual rhythm.
  */
 import { content } from "../content/content";
@@ -16,10 +17,13 @@ const track = [...stack, ...stack];
 
 <section class="stack" aria-label="Tech stack">
   <div class="stack__viewport">
-    <ul class="stack__track" aria-hidden="false">
+    <ul class="stack__track">
       {
         track.map((tech, i) => (
-          <li class={`stack__item ${i % 2 === 0 ? "is-a" : "is-b"}`}>
+          <li
+            class={`stack__item ${i % 2 === 0 ? "is-a" : "is-b"}`}
+            aria-hidden={i >= stack.length ? "true" : undefined}
+          >
             {tech}
           </li>
         ))

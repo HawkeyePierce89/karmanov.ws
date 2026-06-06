@@ -26,6 +26,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://karmanov.ws
 <!doctype html>
 <html lang="en">
   <head>
+    {/* Mark JS as active before paint so the scroll-reveal styles only hide
+        content when they can also reveal it. No-JS users see everything. */}
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
@@ -55,30 +60,50 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://karmanov.ws
 
     <slot />
 
+    {/* Scroll reveal runs INLINE (not in the bundled module below) so the
+        hidden `.js .reveal` state can always be recovered. An external bundle
+        can fail to load or throw; an inline script can't fail as a separate
+        request, and the try/catch reveals everything on any runtime error.
+        This guarantees the static résumé content is never left invisible. */}
+    <script is:inline>
+      try {
+        var reduceMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+        var revealEls = document.querySelectorAll(".reveal");
+        if (reduceMotion || !("IntersectionObserver" in window)) {
+          revealEls.forEach(function (el) {
+            el.classList.add("is-visible");
+          });
+        } else {
+          var io = new IntersectionObserver(
+            function (entries, obs) {
+              for (var i = 0; i < entries.length; i++) {
+                if (entries[i].isIntersecting) {
+                  entries[i].target.classList.add("is-visible");
+                  obs.unobserve(entries[i].target);
+                }
+              }
+            },
+            { rootMargin: "0px 0px -10% 0px", threshold: 0.15 },
+          );
+          revealEls.forEach(function (el) {
+            io.observe(el);
+          });
+        }
+      } catch (err) {
+        // Last-resort failsafe: never leave résumé content hidden.
+        document.querySelectorAll(".reveal").forEach(function (el) {
+          el.classList.add("is-visible");
+        });
+      }
+    </script>
+
     <script>
       const reduceMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
       ).matches;
       const isTouch = window.matchMedia("(pointer: coarse)").matches;
-
-      // --- Scroll reveal --------------------------------------------------
-      const revealEls = document.querySelectorAll<HTMLElement>(".reveal");
-      if (reduceMotion || !("IntersectionObserver" in window)) {
-        revealEls.forEach((el) => el.classList.add("is-visible"));
-      } else {
-        const io = new IntersectionObserver(
-          (entries, obs) => {
-            for (const entry of entries) {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("is-visible");
-                obs.unobserve(entry.target);
-              }
-            }
-          },
-          { rootMargin: "0px 0px -10% 0px", threshold: 0.15 },
-        );
-        revealEls.forEach((el) => io.observe(el));
-      }
 
       // --- Lenis smooth scroll (dynamic import) ---------------------------
       if (!reduceMotion) {
