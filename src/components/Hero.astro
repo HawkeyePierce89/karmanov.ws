@@ -4,9 +4,10 @@
  *
  * All copy is real static HTML driven by `content.ts` (positioning, name,
  * subtitle, stack pills, availability badge). The 3D blob mounts as a React
- * island via `<HeroCanvas client:only="react">`; until it hydrates — and on
- * touch/reduced-motion where the island never loads — a CSS-gradient blob in
- * the `fallback` slot stands in.
+ * island via `<HeroCanvas>` gated on `client:media` so three.js is fetched
+ * only on pointer-fine viewports ≥ 768px. The CSS-gradient blob always renders
+ * underneath as the fallback — it is all that shows on phones, touch devices,
+ * and reduced-motion, where the island never loads.
  */
 import { content } from "../content/content";
 import AvailableBadge from "./AvailableBadge.astro";
@@ -17,9 +18,8 @@ const heroStack = content.stack.slice(0, 6);
 
 <section class="hero" id="top">
   <div class="hero__canvas" aria-hidden="true">
-    <HeroCanvas client:only="react">
-      <div slot="fallback" class="hero__blob"></div>
-    </HeroCanvas>
+    <div class="hero__blob"></div>
+    <HeroCanvas client:media="(min-width: 768px) and (pointer: fine)" />
   </div>
 
   <div class="hero__inner container">

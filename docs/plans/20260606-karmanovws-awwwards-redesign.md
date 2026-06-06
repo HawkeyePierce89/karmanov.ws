@@ -141,10 +141,10 @@ Rebuild karmanov.ws as a single-page, dark, Awwwards-style personal site. Résum
 
 **Files:** Modify `src/components/Hero.astro`, `package.json`; Create `scripts/check-seo.mjs`
 
-- [ ] Gate the island with `client:media="(min-width: 768px) and (pointer: fine)"` so three.js never loads on phones/touch (CSS fallback remains)
-- [ ] Write `scripts/check-seo.mjs` asserting `Anton Karmanov`, `EXANTE`, `Admitad`, `its.events`, `Senior Full-Stack` in `dist/index.html`
-- [ ] Add `check:seo` npm script
-- [ ] Run `npm run build && npm run check:seo` — passes
+- [x] Gate the island with `client:media="(min-width: 768px) and (pointer: fine)"` so three.js never loads on phones/touch (CSS fallback remains)
+- [x] Write `scripts/check-seo.mjs` asserting `Anton Karmanov`, `EXANTE`, `Admitad`, `its.events`, `Senior Full-Stack` in `dist/index.html`
+- [x] Add `check:seo` npm script
+- [x] Run `npm run build && npm run check:seo` — passes
 
 ### Task 16: GitHub Pages deployment workflow
 
