@@ -109,8 +109,8 @@ Rebuild karmanov.ws as a single-page, dark, Awwwards-style personal site. Résum
 
 **Files:** Create `src/components/Experience.astro`
 
-- [ ] Render the four roles (period / company / role / location / summary / bullets) from content
-- [ ] Run `npm run build`; `grep -c "EXANTE" dist/index.html` ≥ 1
+- [x] Render the four roles (period / company / role / location / summary / bullets) from content
+- [x] Run `npm run build`; `grep -c "EXANTE" dist/index.html` ≥ 1
 
 ### Task 12: Projects section (static cards + live stars)
 
