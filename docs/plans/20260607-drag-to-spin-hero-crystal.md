@@ -64,9 +64,9 @@ Replace the crystal's current "constant slow spin + eased tilt-toward-pointer" b
 **Files:**
 - Modify: `src/components/react/HeroCanvas.tsx`
 
-- [ ] Set `<Float rotationIntensity={0}>` (keep `speed` and a light `floatIntensity` for the gentle bob), so drei no longer auto-rotates the group.
-- [ ] Confirm the wrapping `<group>` / mesh still receives pointer events and the gem is grabbable (Float wraps a group; pointer events bubble from the mesh).
-- [ ] Run `npm run build` to confirm the island compiles.
+- [x] Set `<Float rotationIntensity={0}>` (keep `speed` and a light `floatIntensity` for the gentle bob), so drei no longer auto-rotates the group.
+- [x] Confirm the wrapping `<group>` / mesh still receives pointer events and the gem is grabbable (Float wraps a group; pointer events bubble from the mesh).
+- [x] Run `npm run build` to confirm the island compiles.
 
 ### Task 4: Verify acceptance criteria
 
