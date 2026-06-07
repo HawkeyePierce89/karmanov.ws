@@ -28,7 +28,9 @@ export default function HeroCanvas() {
       <ambientLight intensity={0.45} />
       <directionalLight position={lightPos} intensity={3.5} />
 
-      <Float speed={1.2} rotationIntensity={0.5} floatIntensity={0.7}>
+      {/* rotationIntensity=0: drag-to-spin + inertia in Crystal own the rotation;
+          Float only contributes a gentle bob so it never fights manual spin. */}
+      <Float speed={1.2} rotationIntensity={0} floatIntensity={0.7}>
         <group position={[1.6, 0.1, 0]} scale={1.15}>
           <Crystal />
         </group>

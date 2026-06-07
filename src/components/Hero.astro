@@ -64,9 +64,13 @@ const heroStack = content.stack.slice(0, 6);
     pointer-events: none;
   }
 
+  /* The container stays non-interactive so the decorative blob and empty
+     areas never steal clicks/text-selection from the overlay, but the R3F
+     canvas itself must receive pointer input for drag-to-spin (lib/spin.ts). */
   .hero__canvas :global(canvas) {
     width: 100% !important;
     height: 100% !important;
+    pointer-events: auto;
   }
 
   .hero__blob {
@@ -94,6 +98,11 @@ const heroStack = content.stack.slice(0, 6);
     align-items: flex-start;
     gap: clamp(1.1rem, 2.5vw, 1.6rem);
     max-width: 60rem;
+    /* Purely decorative copy: never selectable, and lets pointer events pass
+       through to the canvas so the gem can be grabbed even behind the text. */
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none;
   }
 
   .hero__title {
