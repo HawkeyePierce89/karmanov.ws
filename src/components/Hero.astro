@@ -98,6 +98,11 @@ const heroStack = content.stack.slice(0, 6);
     align-items: flex-start;
     gap: clamp(1.1rem, 2.5vw, 1.6rem);
     max-width: 60rem;
+    /* Purely decorative copy: never selectable, and lets pointer events pass
+       through to the canvas so the gem can be grabbed even behind the text. */
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none;
   }
 
   .hero__title {

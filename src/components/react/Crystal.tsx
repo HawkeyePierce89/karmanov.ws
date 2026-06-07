@@ -18,8 +18,10 @@ import { applyFriction, type Velocity } from '../../lib/spin';
 
 // Drag sensitivity: screen pixels -> radians of rotation.
 const DRAG_K = 0.005;
-// Per-frame friction/decay factor (the feel at 60fps).
-const FRICTION = 0.94;
+// Per-frame friction/decay factor (the feel at 60fps). Closer to 1 = longer
+// flywheel: 0.985 keeps a thrown gem spinning for several seconds before it
+// eases to a stop.
+const FRICTION = 0.985;
 // Idle auto-spin speed (radians/sec) before the first interaction.
 const IDLE_SPIN = 0.25;
 
@@ -41,6 +43,7 @@ export default function Crystal() {
 
   // If the island unmounts mid-drag (e.g. the client:media query stops
   // matching on resize), don't leave the page stuck on a grab/grabbing cursor.
+  // (The hero copy is non-selectable via CSS, so no selection state to reset.)
   useEffect(() => () => {
     document.body.style.cursor = '';
   }, []);
