@@ -8,7 +8,7 @@
  */
 import { content } from "../content/content";
 
-const { label, lead, stats, principles } = content.about;
+const { label, lead, stats } = content.about;
 ---
 
 <section class="about" id="about">
@@ -27,10 +27,6 @@ const { label, lead, stats, principles } = content.about;
         ))
       }
     </dl>
-
-    <ul class="about__principles reveal" aria-label="Principles">
-      {principles.map((principle) => <li class="about__pill">{principle}</li>)}
-    </ul>
   </div>
 </section>
 
@@ -76,25 +72,5 @@ const { label, lead, stats, principles } = content.about;
     font-size: 0.95rem;
     color: var(--muted);
     line-height: 1.35;
-  }
-
-  /* --- Principle pills ----------------------------------------------- */
-  .about__principles {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    margin: clamp(2.5rem, 6vw, 4rem) 0 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .about__pill {
-    padding: 0.5rem 1rem;
-    border-radius: 999px;
-    font-size: 0.88rem;
-    font-weight: 500;
-    color: var(--fg);
-    border: 1px solid var(--line);
-    background: color-mix(in srgb, var(--bg-2) 70%, transparent);
   }
 </style>

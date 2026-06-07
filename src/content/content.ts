@@ -48,9 +48,10 @@ export interface Content {
     label: string;
     lead: string;
     stats: Stat[];
-    principles: string[];
   };
   stack: string[];
+  /** Extra buzzwords/principles shown only in the marquee, not the hero. */
+  keywords: string[];
   experience: ExperienceEntry[];
   projects: Project[];
   contact: {
@@ -81,14 +82,6 @@ export const content: Content = {
       { value: '7', label: 'years TypeScript / React' },
       { value: '4', label: 'years Node.js / NestJS' },
     ],
-    principles: [
-      'Clean Architecture',
-      'DDD',
-      'SOLID',
-      'FSD',
-      'DRY',
-      'KISS',
-    ],
   },
 
   stack: [
@@ -97,17 +90,38 @@ export const content: Content = {
     'Next.js',
     'NestJS',
     'Node.js',
-    'REST',
     'PostgreSQL',
+    'REST',
     'Sentry',
     'Docker',
+  ],
+
+  // Principles + LinkedIn buzzwords — shown only in the marquee (appended to
+  // `stack`), never in the hero pills.
+  keywords: [
+    'Clean Architecture',
+    'DDD',
+    'SOLID',
+    'FSD',
+    'DRY',
+    'KISS',
+    'Highload',
+    'Concurrency',
+    'Design Patterns',
+    'Algorithms',
+    'Agile',
+    'Scrum',
+    'Kanban',
+    'Postman',
+    'curl',
+    'Netcat',
   ],
 
   experience: [
     {
       period: 'Dec 2021 — Feb 2026',
       company: 'EXANTE',
-      role: 'Senior Full-Stack Developer (Contract)',
+      role: 'Senior Full-Stack Developer',
       location: 'Limassol, Cyprus · Remote',
       summary: 'Internal back-office tools for a multi-asset brokerage platform, built with Next.js and NestJS.',
       bullets: [

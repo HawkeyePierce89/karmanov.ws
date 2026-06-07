@@ -73,6 +73,8 @@ const { experience } = content;
     font-weight: 900;
     letter-spacing: -0.04em;
     line-height: 1;
+    /* Room for descenders (g/y) — background-clip:text otherwise crops them. */
+    padding-bottom: 0.12em;
     background: linear-gradient(120deg, var(--fg) 30%, var(--accent) 90%, var(--accent-2));
     -webkit-background-clip: text;
     background-clip: text;

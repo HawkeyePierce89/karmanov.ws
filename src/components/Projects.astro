@@ -16,7 +16,7 @@ const { projects, flags } = content;
 
 <section class="projects" id="projects">
   <div class="container">
-    <p class="label reveal">Projects</p>
+    <p class="label reveal">GitHub</p>
 
     <ul class="projects__grid" data-gh-user={flags.githubUser}>
       {
@@ -37,7 +37,6 @@ const { projects, flags } = content;
                   <span class="projects__dot" aria-hidden="true"></span>
                   <span class="projects__lang-value"></span>
                 </span>
-                <span class="projects__source">GitHub</span>
               </div>
             </a>
           </li>
@@ -177,11 +176,5 @@ const { projects, flags } = content;
     height: 0.55rem;
     border-radius: 999px;
     background: linear-gradient(120deg, var(--accent), var(--accent-2));
-  }
-
-  .projects__source {
-    margin-left: auto;
-    letter-spacing: 0.04em;
-    color: var(--fg);
   }
 </style>

@@ -38,7 +38,7 @@ const heroStack = content.stack.slice(0, 6);
     {
       content.flags.available && (
         <div class="hero__badge reveal">
-          <AvailableBadge />
+          <AvailableBadge label={`Open to opportunities · ${content.location}`} />
         </div>
       )
     }
@@ -110,6 +110,8 @@ const heroStack = content.stack.slice(0, 6);
     font-weight: 900;
     letter-spacing: -0.04em;
     line-height: 0.92;
+    /* Room for descenders (g/y) — background-clip:text otherwise crops them. */
+    padding-bottom: 0.1em;
     background: linear-gradient(120deg, var(--fg) 30%, var(--accent) 75%, var(--accent-2));
     -webkit-background-clip: text;
     background-clip: text;

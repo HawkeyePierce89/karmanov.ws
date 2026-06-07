@@ -10,19 +10,24 @@
  */
 import { content } from "../content/content";
 
-const { stack } = content;
+// Stack technologies plus the principles/buzzwords (keywords) that used to
+// live in the About section.
+const items = [...content.stack, ...content.keywords];
 // Render the list twice for a seamless -50% loop.
-const track = [...stack, ...stack];
+const track = [...items, ...items];
+// Keep the visual scroll speed constant regardless of how many words there
+// are: ~3.6s of travel per item (matches the original 9-item / 32s feel).
+const duration = Math.round(items.length * 3.6);
 ---
 
 <section class="stack" aria-label="Tech stack">
   <div class="stack__viewport">
-    <ul class="stack__track">
+    <ul class="stack__track" style={`--marquee-duration: ${duration}s`}>
       {
         track.map((tech, i) => (
           <li
-            class={`stack__item ${i % 2 === 0 ? "is-a" : "is-b"}`}
-            aria-hidden={i >= stack.length ? "true" : undefined}
+            class={`stack__item ${(i % items.length) % 2 === 0 ? "is-a" : "is-b"}`}
+            aria-hidden={i >= items.length ? "true" : undefined}
           >
             {tech}
           </li>
@@ -31,6 +36,41 @@ const track = [...stack, ...stack];
     </ul>
   </div>
 </section>
+
+<script>
+  // Shuffle the marquee words on every load (Fisher–Yates). We REORDER/CLONE the
+  // existing <li> nodes rather than creating new ones, so Astro's scoped styles
+  // (the big uppercase / stroke look, applied via a data-astro-cid attribute)
+  // are preserved — fresh createElement nodes would miss that attribute and
+  // render unstyled. The server-rendered order is the no-JS / SEO fallback.
+  const track = document.querySelector(".stack__track");
+  if (track) {
+    const all = [...track.children];
+    const n = all.length / 2; // track is the list rendered twice
+    const base = all.slice(0, n);
+
+    for (let i = base.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [base[i], base[j]] = [base[j], base[i]];
+    }
+
+    const second = base.map((node) => {
+      const clone = node.cloneNode(true) as Element;
+      clone.setAttribute("aria-hidden", "true");
+      return clone;
+    });
+    base.forEach((node) => node.removeAttribute("aria-hidden"));
+
+    const ordered = [...base, ...second];
+    // Re-alternate the filled / outlined colours by new position.
+    ordered.forEach((node, i) => {
+      node.classList.remove("is-a", "is-b");
+      node.classList.add((i % n) % 2 === 0 ? "is-a" : "is-b");
+    });
+
+    track.replaceChildren(...ordered);
+  }
+</script>
 
 <style>
   .stack {
@@ -52,7 +92,7 @@ const track = [...stack, ...stack];
     list-style: none;
     width: max-content;
     will-change: transform;
-    animation: marquee-slide 32s linear infinite;
+    animation: marquee-slide var(--marquee-duration, 32s) linear infinite;
   }
 
   .stack__item {

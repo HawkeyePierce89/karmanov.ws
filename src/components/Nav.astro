@@ -11,16 +11,12 @@ import AvailableBadge from "./AvailableBadge.astro";
 const links = [
   { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
+  { label: "GitHub", href: "#projects" },
 ];
 ---
 
 <header class="nav">
   <div class="nav__inner container">
-    <a class="nav__logo" href="#top" aria-label={content.name}>
-      {content.name.split(" ")[0]}<span class="nav__dot">.</span>
-    </a>
-
     <nav class="nav__links" aria-label="Primary">
       {
         links.map((link) => (
@@ -49,19 +45,9 @@ const links = [
   .nav__inner {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 1.5rem;
     min-height: 4.25rem;
-  }
-
-  .nav__logo {
-    font-weight: 800;
-    font-size: 1.1rem;
-    letter-spacing: -0.03em;
-    margin-right: auto;
-  }
-
-  .nav__dot {
-    color: var(--accent);
   }
 
   .nav__links {

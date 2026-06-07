@@ -16,7 +16,7 @@ const { label, cta, email, socials } = content.contact;
   <div class="container">
     <p class="label reveal">{label}</p>
 
-    <a class="contact__cta reveal" href={`mailto:${email}`}>{cta}</a>
+    <p class="contact__cta reveal">{cta}</p>
 
     <p class="contact__email reveal">
       <a href={`mailto:${email}`}>{email}</a>
@@ -51,15 +51,12 @@ const { label, cta, email, socials } = content.contact;
     font-weight: 900;
     letter-spacing: -0.04em;
     line-height: 0.95;
+    /* Room for descenders (g/y) — background-clip:text otherwise crops them. */
+    padding-bottom: 0.12em;
     background: linear-gradient(120deg, var(--fg) 25%, var(--accent) 70%, var(--accent-2));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    transition: opacity 0.4s var(--ease);
-  }
-
-  .contact__cta:hover {
-    opacity: 0.85;
   }
 
   .contact__email {
