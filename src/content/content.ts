@@ -52,6 +52,8 @@ export interface Content {
   stack: string[];
   /** Extra buzzwords/principles shown only in the marquee, not the hero. */
   keywords: string[];
+  /** Path to a downloadable CV PDF in /public. Empty string hides the button. */
+  cvUrl: string;
   experience: ExperienceEntry[];
   projects: Project[];
   contact: {
@@ -116,6 +118,9 @@ export const content: Content = {
     'curl',
     'Netcat',
   ],
+
+  // Redacted CV (phone + home location removed). Set to '' to hide the button.
+  cvUrl: '/Karmanov_Anton_CV.pdf',
 
   experience: [
     {

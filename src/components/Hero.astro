@@ -38,7 +38,7 @@ const heroStack = content.stack.slice(0, 6);
     {
       content.flags.available && (
         <div class="hero__badge reveal">
-          <AvailableBadge label={`Open to opportunities · ${content.location}`} />
+          <AvailableBadge label={`Open to opportunities · ${content.location}`} href="#contact" />
         </div>
       )
     }
@@ -148,6 +148,9 @@ const heroStack = content.stack.slice(0, 6);
 
   .hero__badge {
     margin-top: 0.4rem;
+    /* Re-enable interaction for just the badge — the rest of .hero__inner
+       stays pointer-events:none so the gem can be grabbed through the copy. */
+    pointer-events: auto;
   }
 
   @media (prefers-reduced-motion: reduce) {

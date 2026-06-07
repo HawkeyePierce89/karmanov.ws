@@ -10,6 +10,7 @@
 import { content } from "../content/content";
 
 const { label, cta, email, socials } = content.contact;
+const { cvUrl } = content;
 ---
 
 <section class="contact" id="contact">
@@ -21,6 +22,15 @@ const { label, cta, email, socials } = content.contact;
     <p class="contact__email reveal">
       <a href={`mailto:${email}`}>{email}</a>
     </p>
+
+    {
+      cvUrl && (
+        <a class="contact__cv reveal" href={cvUrl} download>
+          Download CV
+          <span class="contact__cv-arrow" aria-hidden="true">↓</span>
+        </a>
+      )
+    }
 
     <ul class="contact__socials reveal" aria-label="Elsewhere">
       {
@@ -73,6 +83,34 @@ const { label, cta, email, socials } = content.contact;
 
   .contact__email a:hover {
     border-color: var(--accent-2);
+  }
+
+  .contact__cv {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: clamp(1.5rem, 3vw, 2rem);
+    padding: 0.7rem 1.3rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--fg);
+    border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    transition:
+      border-color 0.4s var(--ease),
+      background 0.4s var(--ease),
+      transform 0.4s var(--ease);
+  }
+
+  .contact__cv:hover {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 18%, transparent);
+    transform: translateY(-2px);
+  }
+
+  .contact__cv-arrow {
+    color: var(--accent-2);
   }
 
   .contact__socials {

@@ -7,15 +7,18 @@
 export interface Props {
   /** Override label text; defaults to availability copy. */
   label?: string;
+  /** When set, the badge renders as a link (e.g. "#contact"). */
+  href?: string;
 }
 
-const { label = "Open to opportunities" } = Astro.props;
+const { label = "Open to opportunities", href } = Astro.props;
+const Tag = href ? "a" : "span";
 ---
 
-<span class="badge">
+<Tag class:list={["badge", { "badge--link": href }]} href={href}>
   <span class="badge__dot" aria-hidden="true"></span>
   {label}
-</span>
+</Tag>
 
 <style>
   .badge {
@@ -34,6 +37,18 @@ const { label = "Open to opportunities" } = Astro.props;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     white-space: nowrap;
+  }
+
+  .badge--link {
+    cursor: pointer;
+    transition:
+      border-color 0.3s var(--ease),
+      background 0.3s var(--ease);
+  }
+
+  .badge--link:hover {
+    border-color: color-mix(in srgb, #34d399 55%, transparent);
+    background: color-mix(in srgb, #34d399 18%, transparent);
   }
 
   .badge__dot {
